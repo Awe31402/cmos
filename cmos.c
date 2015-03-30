@@ -23,6 +23,7 @@ int my_get_info(struct seq_file *buf, void *v)
 
 	for (i = 0; i < 10; i++) {
 		outb(i, rtc_base);
+		wmb(); /* write memory barrier */
 		cmos[i] = inb(rtc_base + 1);
 		rmb(); /* memory barrier */
 	}
